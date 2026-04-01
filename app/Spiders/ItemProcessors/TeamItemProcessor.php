@@ -14,7 +14,7 @@ class TeamItemProcessor implements ItemProcessorInterface
     public function processItem(ItemInterface $item): ItemInterface
     {
         Team::updateOrCreate(
-            ['nba_reference_id' => $item->get('nba_reference_id')],
+            ['external_id' => $item->get('external_id')],
             $item->all()
         );
 

@@ -12,19 +12,19 @@ class TeamData
         public string $name,
         public string $slug,
         public string $logo,
-        public string $nbaReferenceId,
+        public string $externalId,
         public int $leagueId,
         public Conference $conference,
         public Division $division,
     ) {}
 
-    public static function fromNba(string $name, string $logo, string $nbaReferenceId, Conference $conference, Division $division): self
+    public static function forNba(string $name, string $logo, string $externalId, Conference $conference, Division $division): self
     {
         return new self(
             $name,
             Str::slug($name),
             $logo,
-            $nbaReferenceId,
+            $externalId,
             1,
             $conference,
             $division
@@ -37,7 +37,7 @@ class TeamData
             'name' => $this->name,
             'slug' => $this->slug,
             'logo' => $this->logo,
-            'nba_reference_id' => $this->nbaReferenceId,
+            'external_id' => $this->externalId,
             'league_id' => $this->leagueId,
             'conference' => $this->conference->value,
             'division' => $this->division->value,

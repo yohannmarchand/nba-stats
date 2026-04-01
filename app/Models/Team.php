@@ -16,7 +16,7 @@ class Team extends Model
         'slug',
         'logo',
         'league_id',
-        'nba_reference_id',
+        'external_id',
         'division',
         'conference',
     ];

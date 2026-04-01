@@ -84,10 +84,10 @@ class TeamSpider extends BasicSpider
         $logoNode = $response->filter('.media-item.logo img.teamlogo');
         $logo = $logoNode->count() > 0 ? $logoNode->attr('src') : '';
 
-        $nbaReferenceId = Str::of($response->getUri())->afterLast('/')->value();
+        $externalId = Str::of($response->getUri())->afterLast('/')->value();
 
-        $divisionNode = $response->filter('.division')->reduce(function ($node) use ($nbaReferenceId) {
-            return $node->filter('a[href*="/teams/'.$nbaReferenceId.'/"]')->count() > 0;
+        $divisionNode = $response->filter('.division')->reduce(function ($node) use ($externalId) {
+            return $node->filter('a[href*="/teams/'.$externalId.'/"]')->count() > 0;
         });
 
         $divisionName = $divisionNode->count() > 0 ? trim($divisionNode->filter('strong')->first()->text(), ': ') : '';
@@ -102,10 +102,10 @@ class TeamSpider extends BasicSpider
             default => Division::EASTERN_DIVISION,
         };
 
-        yield $this->item(TeamData::fromNba(
+        yield $this->item(TeamData::forNba(
             $name,
             $logo,
-            $nbaReferenceId,
+            $externalId,
             Conference::fromDivision($division),
             $division,
         )->toArray());
