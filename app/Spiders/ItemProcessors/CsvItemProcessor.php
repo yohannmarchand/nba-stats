@@ -10,10 +10,16 @@ class CsvItemProcessor implements ItemProcessorInterface
 {
     use Configurable;
 
+    protected function defaultOptions(): array
+    {
+        return [
+            'path' => storage_path('app/teams_urls.csv'),
+        ];
+    }
+
     public function processItem(ItemInterface $item): ItemInterface
     {
-        $file = storage_path('app/teams_urls.csv');
-        $handle = fopen($file, 'a');
+        $handle = fopen($this->option('path'), 'a');
 
         if ($handle) {
             $data = $item->all();

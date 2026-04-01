@@ -4,6 +4,7 @@ namespace App\Spiders\NbaReference;
 
 use App\Spiders\ItemProcessors\CsvItemProcessor;
 use Generator;
+use Illuminate\Support\Facades\Log;
 use RoachPHP\Downloader\Middleware\RequestDeduplicationMiddleware;
 use RoachPHP\Extensions\LoggerExtension;
 use RoachPHP\Extensions\StatsCollectorExtension;
@@ -26,7 +27,7 @@ class TeamsSpider extends BasicSpider
     ];
 
     public array $itemProcessors = [
-        CsvItemProcessor::class,
+        [CsvItemProcessor::class, ['path' => 'storage/app/teams_urls.csv']],
     ];
 
     public array $extensions = [
@@ -43,6 +44,12 @@ class TeamsSpider extends BasicSpider
      */
     public function parse(Response $response): Generator
     {
+        if ($response->getStatus() === \Symfony\Component\HttpFoundation\Response::HTTP_TOO_MANY_REQUESTS) {
+            Log::error('Error: '.$response->getStatus());
+
+            return;
+        }
+
         $urls = $response->filter('.full_table a')->each(fn ($node) => 'https://www.basketball-reference.com'.$node->attr('href'));
 
         yield $this->item([
