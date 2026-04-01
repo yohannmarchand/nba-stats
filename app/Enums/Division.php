@@ -2,15 +2,15 @@
 
 namespace App\Enums;
 
-enum Division
+enum Division: string
 {
-    const ATLANTIC_DIVISION = 'atlantic_division';
-    const CENTRAL_DIVISION = 'central_division';
-    const EASTERN_DIVISION = 'eastern_division';
-    const MIDWEST_DIVISION = 'midwest_division';
-    const NORTHWEST_DIVISION  = 'northwest_division';
-    const PACIFIC_DIVISION = 'pacific_division';
-    const SOUTHEAST_DIVISION = 'southeast_division';
-    const SOUTHWEST_DIVISION = 'southwest_division';
-    const WESTERN_DIVISION = 'western_division';
+    case ATLANTIC_DIVISION = 'atlantic_division';
+    case CENTRAL_DIVISION = 'central_division';
+    case EASTERN_DIVISION = 'eastern_division';
+    case MIDWEST_DIVISION = 'midwest_division';
+    case NORTHWEST_DIVISION  = 'northwest_division';
+    case PACIFIC_DIVISION = 'pacific_division';
+    case SOUTHEAST_DIVISION = 'southeast_division';
+    case SOUTHWEST_DIVISION = 'southwest_division';
+    case WESTERN_DIVISION = 'western_division';
 }

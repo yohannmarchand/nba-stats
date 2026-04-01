@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('logo');
             $table->foreignId('league_id')->constrained()->cascadeOnDelete();
             $table->string('nba_reference_id')->unique();
-            $table->enum('division', Division::cases());
-            $table->enum('conference', Conference::cases());
+            $table->enum('division', array_column(Division::cases(), 'value'));
+            $table->enum('conference', array_column(Conference::cases(), 'value'));
             $table->timestamps();
         });
     }

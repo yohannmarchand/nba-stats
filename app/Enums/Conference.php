@@ -2,8 +2,8 @@
 
 namespace App\Enums;
 
-enum Conference
+enum Conference: string
 {
-    const WEST = 'west';
-    const EAST = 'west';
+    case WEST = 'west';
+    case EAST = 'east';
 }

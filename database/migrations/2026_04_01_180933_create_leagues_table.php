@@ -20,7 +20,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        League::create([
+        League::query()->create([
             'name' => 'NBA',
             'slug' => 'nba',
             'logo' => 'https://cdn.nba.com/logos/leagues/logo-nba.svg',
