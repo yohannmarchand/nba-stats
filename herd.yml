@@ -1,0 +1,13 @@
+name: nba-stats
+php: '8.4'
+secured: true
+aliases: {  }
+services:
+    postgresql:
+        version: '18'
+        port: 5432
+    redis:
+        version: 7.4.9
+        port: '${REDIS_PORT}'
+integrations:
+    forge: {  }
