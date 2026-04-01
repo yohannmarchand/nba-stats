@@ -17,7 +17,7 @@ use RoachPHP\Http\Response;
 use RoachPHP\Spider\BasicSpider;
 use RoachPHP\Spider\ParseResult;
 
-class TeamDetailSpider extends BasicSpider
+class TeamSpider extends BasicSpider
 {
     public array $startUrls = [
         //
