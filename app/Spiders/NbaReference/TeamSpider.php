@@ -5,6 +5,7 @@ namespace App\Spiders\NbaReference;
 use App\Data\TeamData;
 use App\Enums\Conference;
 use App\Enums\Division;
+use App\Models\Team;
 use App\Spiders\ItemProcessors\TeamItemProcessor;
 use Generator;
 use Illuminate\Support\Facades\Log;
@@ -40,10 +41,17 @@ class TeamSpider extends BasicSpider
             fclose($handle);
         }
 
-        return array_map(
-            fn (string $url) => new Request('GET', $url, [$this, 'parse']),
-            array_unique($urls)
-        );
+        $existingExternalIds = Team::pluck('external_id')->toArray();
+
+        return collect($urls)
+            ->unique()
+            ->filter(function (string $url) use ($existingExternalIds) {
+                $externalId = Str::of($url)->afterLast('/')->value();
+
+                return ! in_array($externalId, $existingExternalIds);
+            })
+            ->map(fn (string $url) => new Request('GET', $url, [$this, 'parse']))
+            ->toArray();
     }
 
     public array $downloaderMiddleware = [
