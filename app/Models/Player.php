@@ -14,7 +14,6 @@ class Player extends Model
 
     protected $fillable = [
         'external_id',
-        'nba_id',
         'first_name',
         'last_name',
         'player_slug',

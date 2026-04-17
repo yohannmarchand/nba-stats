@@ -120,7 +120,7 @@ class DataballrService
             );
 
             // Synchroniser le box score
-            $boxScoreData = BoxScoreData::fromArray($boxScoreArray);
+            $boxScoreData = BoxScoreData::fromArray($boxScoreArray, $player->external_id);
 
             // On utilise updateOrCreate pour éviter les doublons si on relance le sync
             // La clé unique ici est (player_id, match_id)

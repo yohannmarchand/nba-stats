@@ -28,10 +28,10 @@ class BoxScoreData
         public int $plusMinus,
     ) {}
 
-    public static function fromArray(array $data): self
+    public static function fromArray(array $data, int $playerId): self
     {
         return new self(
-            playerExternalId: (int) $data['player']['id'],
+            playerExternalId: $playerId,
             min: $data['min'] ?? '00',
             fgm: (int) $data['fgm'],
             fga: (int) $data['fga'],
