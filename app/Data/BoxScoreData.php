@@ -56,7 +56,7 @@ class BoxScoreData
     {
         return [
             'player_id' => Player::query()->firstWhere('external_id', $this->playerExternalId)?->id,
-            'match_id' => Game::query()->firstWhere('games.external_id', $matchId)?->id,
+            'match_id' => Game::query()->firstWhere('external_id', $matchId)?->id ?? $matchId,
             'min' => $this->min,
             'fgm' => $this->fgm,
             'fga' => $this->fga,

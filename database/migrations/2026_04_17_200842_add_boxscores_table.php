@@ -13,7 +13,7 @@ return new class extends Migration
 
             // Relations
             $table->foreignId('player_id')->constrained('players')->onDelete('cascade');
-            $table->foreignId('match_id')->constrained('matches')->onDelete('cascade');
+            $table->foreignId('match_id')->constrained('games')->onDelete('cascade');
             $table->string('min')->default('00');
             $table->integer('fgm')->default(0); // Réussis
             $table->integer('fga')->default(0); // Tentés
