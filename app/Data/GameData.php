@@ -59,6 +59,7 @@ class GameData
     public function toArray(): array
     {
         return [
+            'league_id' => 1,
             'external_id' => $this->externalId,
             'date_time' => $this->dateTime->toDateTimeString(),
             'season' => $this->season,
