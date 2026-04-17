@@ -2,22 +2,37 @@
 import { Link, usePage } from '@inertiajs/vue3';
 import { computed } from 'vue';
 import { login, logout, register } from '@/routes';
+import { edit as editProfile } from '@/routes/profile';
 
 const page = usePage();
 const user = computed(() => page.props.auth.user);
-const canRegister = computed(() => (page.props as { canRegister?: boolean }).canRegister ?? true);
+const canRegister = computed(
+    () => (page.props as { canRegister?: boolean }).canRegister ?? true,
+);
 </script>
 
 <template>
-    <div class="flex min-h-screen flex-col bg-[#FDFDFC] text-[#1b1b18] dark:bg-[#0a0a0a]">
+    <div
+        class="flex min-h-screen flex-col bg-[#FDFDFC] text-[#1b1b18] dark:bg-[#0a0a0a]"
+    >
         <header class="w-full border-b border-[#e3e3e0] dark:border-[#3E3E3A]">
-            <div class="mx-auto flex h-14 max-w-7xl items-center justify-between px-6">
-                <Link href="/" class="text-sm font-semibold tracking-tight dark:text-[#EDEDEC]">
+            <div
+                class="mx-auto flex h-14 max-w-7xl items-center justify-between px-6"
+            >
+                <Link
+                    href="/"
+                    class="text-sm font-semibold tracking-tight dark:text-[#EDEDEC]"
+                >
                     NBA Stats
                 </Link>
                 <nav class="flex items-center gap-4 text-sm">
                     <template v-if="user">
-                        <span class="text-[#1b1b18] dark:text-[#EDEDEC]">{{ user.name }}</span>
+                        <Link
+                            :href="editProfile()"
+                            class="text-[#1b1b18] dark:text-[#EDEDEC]"
+                        >
+                            {{ user.name }}
+                        </Link>
                         <Link
                             :href="logout()"
                             method="post"
