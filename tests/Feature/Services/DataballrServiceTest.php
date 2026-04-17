@@ -20,22 +20,25 @@ it('can sync games and box scores for a date', function () {
     // 2. Faker les réponses HTTP
     Http::fake([
         "https://api.databallr.com/api/live/games/{$date}" => Http::response([
-            [
-                'id' => 18448007,
-                'datetime' => '2026-04-12T22:00:00.000Z',
-                'season' => 2025,
-                'postseason' => false,
-                'home_team' => ['id' => 16],
-                'visitor_team' => ['id' => 1],
-                'home_team_score' => 143,
-                'visitor_team_score' => 117,
-                'home_q1' => 33, 'home_q2' => 37, 'home_q3' => 29, 'home_q4' => 44,
-                'visitor_q1' => 24, 'visitor_q2' => 37, 'visitor_q3' => 23, 'visitor_q4' => 33,
-                'status' => 'Final',
-                'period' => 4,
+            'data' => [
+                [
+                    'id' => 18448007,
+                    'datetime' => '2026-04-12T22:00:00.000Z',
+                    'season' => 2025,
+                    'postseason' => false,
+                    'home_team' => ['id' => 16],
+                    'visitor_team' => ['id' => 1],
+                    'home_team_score' => 143,
+                    'visitor_team_score' => 117,
+                    'home_q1' => 33, 'home_q2' => 37, 'home_q3' => 29, 'home_q4' => 44,
+                    'visitor_q1' => 24, 'visitor_q2' => 37, 'visitor_q3' => 23, 'visitor_q4' => 33,
+                    'status' => 'Final',
+                    'period' => 4,
+                ],
             ],
         ]),
         "https://api.databallr.com/api/live/box-score/18448007?date={$date}" => Http::response([
+            'data' => [
             'home_team' => [
                 'players' => [
                     [
@@ -60,6 +63,7 @@ it('can sync games and box scores for a date', function () {
             'visitor_team' => [
                 'players' => [],
             ],
+            ],
         ]),
     ]);
 
@@ -73,7 +77,7 @@ it('can sync games and box scores for a date', function () {
 
     expect(Player::count())->toBe(1);
     $player = Player::first();
-    expect($player->external_id)->toBe(304);
+    expect($player->external_id)->toBe(204456);
 
     expect(BoxScore::count())->toBe(1);
     $boxScore = BoxScore::first();

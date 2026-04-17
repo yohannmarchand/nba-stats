@@ -49,11 +49,10 @@ it('can create a PlayerData and BoxScoreData from array', function () {
 
     $data = json_decode($json, true);
     $playerData = PlayerData::fromArray($data['player']);
-    $boxScoreData = BoxScoreData::fromArray($data);
+    $boxScoreData = BoxScoreData::fromArray($data, $data['player']['id']);
 
     // Test PlayerData
-    expect($playerData->externalId)->toBe(304)
-        ->and($playerData->nbaId)->toBe(204456)
+    expect($playerData->externalId)->toBe(204456)
         ->and($playerData->firstName)->toBe('T.J.')
         ->and($playerData->lastName)->toBe('McConnell')
         ->and($playerData->playerSlug)->toBe('tj-mcconnell')

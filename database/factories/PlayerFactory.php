@@ -19,7 +19,6 @@ class PlayerFactory extends Factory
     {
         return [
             'external_id' => fake()->unique()->randomNumber(8),
-            'nba_id' => fake()->unique()->randomNumber(8),
             'first_name' => fake()->firstName(),
             'last_name' => fake()->lastName(),
             'player_slug' => fake()->slug(),

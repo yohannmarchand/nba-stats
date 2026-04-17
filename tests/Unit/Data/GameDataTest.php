@@ -100,6 +100,7 @@ it('can transform to array for database', function () {
     $array = $gameData->toArray();
 
     expect($array)->toBe([
+        'league_id' => 1,
         'external_id' => '123',
         'date_time' => '2026-04-17 20:00:00',
         'season' => 2025,

@@ -22,22 +22,26 @@ it('can sync a full year of data via console command', function () {
 
     Http::fake([
         'https://api.databallr.com/api/live/games/*' => Http::response([
-            [
-                'id' => 18448007,
-                'datetime' => '2026-04-12T22:00:00.000Z',
-                'season' => 2025,
-                'postseason' => false,
-                'home_team' => ['id' => 16],
-                'visitor_team' => ['id' => 1],
-                'home_team_score' => 143,
-                'visitor_team_score' => 117,
-                'status' => 'Final',
-                'period' => 4,
+            'data' => [
+                [
+                    'id' => 18448007,
+                    'datetime' => '2026-04-12T22:00:00.000Z',
+                    'season' => 2025,
+                    'postseason' => false,
+                    'home_team' => ['id' => 16],
+                    'visitor_team' => ['id' => 1],
+                    'home_team_score' => 143,
+                    'visitor_team_score' => 117,
+                    'status' => 'Final',
+                    'period' => 4,
+                ],
             ],
         ], 200),
         'https://api.databallr.com/api/live/box-score/*' => Http::response([
-            'home_team' => ['players' => []],
-            'visitor_team' => ['players' => []],
+            'data' => [
+                'home_team' => ['players' => []],
+                'visitor_team' => ['players' => []],
+            ],
         ], 200),
     ]);
 
