@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "laravel-boost": {
+      "command": "/Users/yohann/Library/Application Support/Herd/bin/php84",
+      "args": [
+        "/Users/yohann/workspaces/sites/nba-stats/artisan",
+        "boost:mcp"
+      ]
+    }
+  }
+}
