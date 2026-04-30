@@ -27,7 +27,7 @@ class GameData
         return new self(
             externalId: (string) $data['id'],
             dateTime: Carbon::parse($data['datetime']),
-            season: (int) $data['season'],
+            season: (int) $data['season'] + 1,
             isPostseason: (bool) $data['postseason'],
             homeTeamExternalId: (string) $data['home_team']['id'],
             visitorTeamExternalId: (string) $data['visitor_team']['id'],
