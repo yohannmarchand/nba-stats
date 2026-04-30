@@ -45,7 +45,7 @@ class PlayerRepository
     private function assertValidKey(string $key): void
     {
         if (! in_array($key, BoxScore::STAT_KEYS, strict: true)) {
-            throw new InvalidArgumentException("Invalid stat key: [{$key}]. Allowed: " . implode(', ', BoxScore::STAT_KEYS));
+            throw new InvalidArgumentException("Invalid stat key: [{$key}]. Allowed: ".implode(', ', BoxScore::STAT_KEYS));
         }
     }
 }

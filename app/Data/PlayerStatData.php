@@ -8,7 +8,7 @@ class PlayerStatData
         public readonly int $rank,
         public readonly string $firstName,
         public readonly string $lastName,
-        public readonly string|null $imageUrl,
+        public readonly ?string $imageUrl,
         public readonly string $key,
         public readonly float $value,
     ) {}

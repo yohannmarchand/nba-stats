@@ -7,7 +7,7 @@ class StandingEntryData
     public function __construct(
         public readonly int $rank,
         public readonly string $teamName,
-        public readonly string|null $teamLogo,
+        public readonly ?string $teamLogo,
         public readonly int $wins,
         public readonly int $losses,
         public readonly float $pct,

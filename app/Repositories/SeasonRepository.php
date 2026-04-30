@@ -10,7 +10,7 @@ use Illuminate\Support\Collection;
 class SeasonRepository
 {
     /**
-     * @return Collection<int, Team>  Each Team has appended `wins` and `losses` integer attributes.
+     * @return Collection<int, Team> Each Team has appended `wins` and `losses` integer attributes.
      */
     public function getStanding(int $leagueId, int $season, Conference $conference): Collection
     {

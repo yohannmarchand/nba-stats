@@ -39,30 +39,30 @@ it('can sync games and box scores for a date', function () {
         ]),
         "https://api.databallr.com/api/live/box-score/18448007?date={$date}" => Http::response([
             'data' => [
-            'home_team' => [
-                'players' => [
-                    [
-                        'player' => [
-                            'id' => 304,
-                            'first_name' => 'T.J.',
-                            'last_name' => 'McConnell',
-                            'nba_id' => 204456,
-                            'player_slug' => 'tj-mcconnell',
-                            'position' => 'G',
-                            'height' => '6-1',
-                            'weight' => '190',
-                            'country' => 'USA',
+                'home_team' => [
+                    'players' => [
+                        [
+                            'player' => [
+                                'id' => 304,
+                                'first_name' => 'T.J.',
+                                'last_name' => 'McConnell',
+                                'nba_id' => 204456,
+                                'player_slug' => 'tj-mcconnell',
+                                'position' => 'G',
+                                'height' => '6-1',
+                                'weight' => '190',
+                                'country' => 'USA',
+                            ],
+                            'min' => '25',
+                            'fgm' => 5, 'fga' => 10, 'fg3m' => 1, 'fg3a' => 2, 'ftm' => 2, 'fta' => 2,
+                            'oreb' => 1, 'dreb' => 2, 'reb' => 3, 'ast' => 8, 'stl' => 2, 'blk' => 0,
+                            'turnover' => 1, 'pf' => 2, 'pts' => 13, 'plus_minus' => 5,
                         ],
-                        'min' => '25',
-                        'fgm' => 5, 'fga' => 10, 'fg3m' => 1, 'fg3a' => 2, 'ftm' => 2, 'fta' => 2,
-                        'oreb' => 1, 'dreb' => 2, 'reb' => 3, 'ast' => 8, 'stl' => 2, 'blk' => 0,
-                        'turnover' => 1, 'pf' => 2, 'pts' => 13, 'plus_minus' => 5,
                     ],
                 ],
-            ],
-            'visitor_team' => [
-                'players' => [],
-            ],
+                'visitor_team' => [
+                    'players' => [],
+                ],
             ],
         ]),
     ]);
