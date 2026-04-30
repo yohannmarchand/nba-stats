@@ -21,6 +21,7 @@ class Player extends Model
         'height',
         'weight',
         'country',
+        'image_url',
     ];
 
     public function boxScores(): HasMany

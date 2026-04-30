@@ -112,6 +112,10 @@ class DataballrService
         );
 
         foreach ($players as $boxScoreArray) {
+            if ((int) $boxScoreArray['min'] === 0) {
+                continue;
+            }
+
             // Synchroniser le joueur d'abord
             $playerData = PlayerData::fromArray($boxScoreArray['player']);
             $player = Player::query()->updateOrCreate(

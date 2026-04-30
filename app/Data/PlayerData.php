@@ -13,12 +13,15 @@ class PlayerData
         public ?string $height,
         public ?string $weight,
         public ?string $country,
+        public ?string $imageUrl,
     ) {}
 
     public static function fromArray(array $data): self
     {
+        $nbaId = (int) ($data['nba_id'] ?? 0);
+
         return new self(
-            externalId: (int) ($data['nba_id'] ?? 0),
+            externalId: $nbaId,
             firstName: $data['first_name'],
             lastName: $data['last_name'],
             playerSlug: $data['player_slug'] ?? null,
@@ -26,6 +29,7 @@ class PlayerData
             height: $data['height'] ?? null,
             weight: $data['weight'] ?? null,
             country: $data['country'] ?? null,
+            imageUrl: $nbaId > 0 ? "https://cdn.nba.com/headshots/nba/latest/1040x760/{$nbaId}.png" : null,
         );
     }
 
@@ -40,6 +44,7 @@ class PlayerData
             'height' => $this->height,
             'weight' => $this->weight,
             'country' => $this->country,
+            'image_url' => $this->imageUrl,
         ];
     }
 }

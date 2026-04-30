@@ -9,7 +9,7 @@ class BoxScoreData
 {
     public function __construct(
         public int $playerExternalId,
-        public string $min,
+        public int $min,
         public int $fgm,
         public int $fga,
         public int $fg3m,
@@ -32,7 +32,7 @@ class BoxScoreData
     {
         return new self(
             playerExternalId: $playerId,
-            min: $data['min'] ?? '00',
+            min: (int) $data['min'],
             fgm: (int) $data['fgm'],
             fga: (int) $data['fga'],
             fg3m: (int) $data['fg3m'],
