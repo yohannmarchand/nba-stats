@@ -23,11 +23,7 @@ type Props = {
     playerStats?: PlayerStat[];
 };
 
-const {
-    league,
-    season,
-    seasons,
-} = defineProps<Props>();
+const { league, season, seasons } = defineProps<Props>();
 
 defineOptions({ layout: MainLayout });
 </script>
@@ -47,7 +43,7 @@ defineOptions({ layout: MainLayout });
 
                 <!-- Standings + Bracket -->
                 <div class="grid grid-cols-1 gap-4 lg:grid-cols-3">
-                    <StandingsCard class="lg:col-span-1" />
+                    <StandingsCard class="lg:col-span-1" :league :season />
                     <PlayoffBracket :season class="lg:col-span-2" />
                 </div>
             </TabsContent>

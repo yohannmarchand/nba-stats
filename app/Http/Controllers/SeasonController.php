@@ -14,7 +14,7 @@ class SeasonController extends Controller
     {
         $leagueModel = League::where('slug', $league)->firstOrFail();
 
-        $seasons = Game::where('league_id', $leagueModel->id)
+        $seasons = Game::forLeague($leagueModel->id)
             ->distinct()
             ->orderByDesc('season')
             ->pluck('season')

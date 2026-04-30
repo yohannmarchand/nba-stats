@@ -1,31 +1,39 @@
 <script setup lang="ts">
+import { ref, watch, onMounted } from 'vue';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import type { League, StandingEntry } from '@/types';
+import { index as standingIndex } from '@/routes/standing';
 
-export type Conference = 'east' | 'west';
-
-export type StandingEntry = {
-    rank: number;
-    team: {
-        name: string;
-        logo: string | null;
-    };
-    wins: number;
-    losses: number;
-    pct: number;
-};
+type Conference = 'east' | 'west';
 
 type Props = {
-    east?: StandingEntry[];
-    west?: StandingEntry[];
+    league: League;
+    season: number;
 };
 
-const conference = defineModel<Conference>('conference', { default: 'east' });
+const { league, season } = defineProps<Props>();
 
-withDefaults(defineProps<Props>(), {
-    east: () => [],
-    west: () => [],
-});
+const conference = ref<Conference>('east');
+const entries = ref<StandingEntry[]>([]);
+const loading = ref(false);
+
+async function fetchStandings() {
+    loading.value = true;
+    try {
+        const route = standingIndex(
+            { league: league.slug, season },
+            { query: { conference: conference.value } },
+        );
+        const res = await fetch(route.url);
+        entries.value = await res.json();
+    } finally {
+        loading.value = false;
+    }
+}
+
+onMounted(fetchStandings);
+watch(conference, fetchStandings);
 </script>
 
 <template>
@@ -63,9 +71,9 @@ withDefaults(defineProps<Props>(), {
                     </tr>
                 </thead>
                 <tbody>
-                    <template v-if="(conference === 'east' ? east : west)?.length">
+                    <template v-if="!loading && entries.length">
                         <tr
-                            v-for="entry in (conference === 'east' ? east : west)"
+                            v-for="entry in entries"
                             :key="entry.rank"
                             class="border-b border-border/50 last:border-0"
                         >
@@ -90,7 +98,7 @@ withDefaults(defineProps<Props>(), {
                     </template>
                     <tr v-else>
                         <td colspan="5" class="py-8 text-center text-muted-foreground">
-                            Données à venir
+                            {{ loading ? 'Chargement…' : 'Données à venir' }}
                         </td>
                     </tr>
                 </tbody>

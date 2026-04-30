@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Database\Factories\GameFactory;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -13,6 +14,7 @@ class Game extends Model
     use HasFactory;
 
     protected $fillable = [
+        'league_id',
         'date_time',
         'season',
         'is_postseason',
@@ -26,6 +28,26 @@ class Game extends Model
         'period',
         'external_id',
     ];
+
+    public function scopeForLeague(Builder $query, int $leagueId): void
+    {
+        $query->where('league_id', $leagueId);
+    }
+
+    public function scopeForSeason(Builder $query, int $season): void
+    {
+        $query->where('season', $season);
+    }
+
+    public function scopeRegularSeason(Builder $query): void
+    {
+        $query->where('is_postseason', false);
+    }
+
+    public function scopeFinished(Builder $query): void
+    {
+        $query->where('status', 'Final');
+    }
 
     protected function casts(): array
     {
