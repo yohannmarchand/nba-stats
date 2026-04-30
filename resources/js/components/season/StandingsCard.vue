@@ -20,6 +20,7 @@ const loading = ref(false);
 
 async function fetchStandings() {
     loading.value = true;
+
     try {
         const route = standingIndex(
             { league: league.slug, season },

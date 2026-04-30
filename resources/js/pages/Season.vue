@@ -38,7 +38,10 @@ defineOptions({ layout: MainLayout });
             <TabsContent value="overview" class="mt-0 space-y-8">
                 <!-- KPI -->
                 <div class="grid grid-cols-2 gap-4 lg:grid-cols-4">
-
+                    <PlayerStatsCard :league :season stat="pts" label="Points" />
+                    <PlayerStatsCard :league :season stat="reb" label="Rebonds" />
+                    <PlayerStatsCard :league :season stat="ast" label="Passes" />
+                    <PlayerStatsCard :league :season stat="blk" label="Contres" />
                 </div>
 
                 <!-- Standings + Bracket -->
