@@ -1,0 +1,100 @@
+<script setup lang="ts">
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+
+export type Conference = 'east' | 'west';
+
+export type StandingEntry = {
+    rank: number;
+    team: {
+        name: string;
+        logo: string | null;
+    };
+    wins: number;
+    losses: number;
+    pct: number;
+};
+
+type Props = {
+    east?: StandingEntry[];
+    west?: StandingEntry[];
+};
+
+const conference = defineModel<Conference>('conference', { default: 'east' });
+
+withDefaults(defineProps<Props>(), {
+    east: () => [],
+    west: () => [],
+});
+</script>
+
+<template>
+    <Card class="flex h-full flex-col rounded-xl">
+        <CardHeader>
+            <div class="flex items-center justify-between">
+                <CardTitle>Classement</CardTitle>
+                <div class="flex gap-1">
+                    <Button
+                        size="sm"
+                        :variant="conference === 'east' ? 'default' : 'ghost'"
+                        @click="conference = 'east'"
+                    >
+                        Est
+                    </Button>
+                    <Button
+                        size="sm"
+                        :variant="conference === 'west' ? 'default' : 'ghost'"
+                        @click="conference = 'west'"
+                    >
+                        Ouest
+                    </Button>
+                </div>
+            </div>
+        </CardHeader>
+        <CardContent class="flex-1">
+            <table class="w-full text-sm">
+                <thead>
+                    <tr class="border-b text-left text-muted-foreground">
+                        <th class="pb-2 font-medium">#</th>
+                        <th class="pb-2 font-medium">Équipe</th>
+                        <th class="pb-2 text-center font-medium">V</th>
+                        <th class="pb-2 text-center font-medium">D</th>
+                        <th class="pb-2 text-center font-medium">%</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template v-if="(conference === 'east' ? east : west)?.length">
+                        <tr
+                            v-for="entry in (conference === 'east' ? east : west)"
+                            :key="entry.rank"
+                            class="border-b border-border/50 last:border-0"
+                        >
+                            <td class="py-2 text-muted-foreground">{{ entry.rank }}</td>
+                            <td class="py-2">
+                                <div class="flex items-center gap-2">
+                                    <img
+                                        v-if="entry.team.logo"
+                                        :src="entry.team.logo"
+                                        :alt="entry.team.name"
+                                        class="h-4 w-4 object-contain"
+                                    />
+                                    <span>{{ entry.team.name }}</span>
+                                </div>
+                            </td>
+                            <td class="py-2 text-center">{{ entry.wins }}</td>
+                            <td class="py-2 text-center">{{ entry.losses }}</td>
+                            <td class="py-2 text-center text-muted-foreground">
+                                {{ entry.pct.toFixed(3).replace('0.', '.') }}
+                            </td>
+                        </tr>
+                    </template>
+                    <tr v-else>
+                        <td colspan="5" class="py-8 text-center text-muted-foreground">
+                            Données à venir
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </CardContent>
+    </Card>
+</template>
