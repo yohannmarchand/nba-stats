@@ -63,7 +63,7 @@ it('can create a PlayerData and BoxScoreData from array', function () {
 
     // Test BoxScoreData
     expect($boxScoreData->playerExternalId)->toBe(304)
-        ->and($boxScoreData->min)->toBe('25:00')
+        ->and($boxScoreData->min)->toBe(25)
         ->and($boxScoreData->pts)->toBe(16)
         ->and($boxScoreData->ast)->toBe(5)
         ->and($boxScoreData->reb)->toBe(4)
@@ -87,7 +87,7 @@ it('can transform BoxScoreData to array with player_id', function () {
 
     $boxScoreData = new BoxScoreData(
         playerExternalId: 304,
-        min: '20:00',
+        min: 20,
         fgm: 4,
         fga: 8,
         fg3m: 1,
@@ -111,5 +111,5 @@ it('can transform BoxScoreData to array with player_id', function () {
     expect($array['player_id'])->toBe($player->id)
         ->and($array['match_id'])->toBe(99)
         ->and($array['pts'])->toBe(11)
-        ->and($array['min'])->toBe('20:00');
+        ->and($array['min'])->toBe(20);
 });

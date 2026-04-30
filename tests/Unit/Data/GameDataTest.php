@@ -103,7 +103,7 @@ it('can transform to array for database', function () {
         'league_id' => 1,
         'external_id' => '123',
         'date_time' => '2026-04-17 20:00:00',
-        'season' => 2025,
+        'season' => 2026,
         'is_postseason' => true,
         'home_team_id' => $homeTeam->id,
         'visitor_team_id' => $visitorTeam->id,
